@@ -109,7 +109,7 @@ public:
 
   void SigmaPointPrediction(float delta_t, MatrixXd &Xsig_aug);
 
-  void PredictMeanAndCovariance(void );
+  void PredictMeanAndCovariance( );
 
 
 };
