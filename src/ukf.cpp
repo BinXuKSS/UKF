@@ -160,7 +160,7 @@ void UKF::Prediction(float delta_t) {
 }
 
 
-void UKF::AugmentedSigmaPoints(MatrixXd* Xsig_aug)
+void UKF::AugmentedSigmaPoints(MatrixXd &Xsig_aug)
 {
 
 //create augmented mean vector	
@@ -190,7 +190,7 @@ for (int i = 0; i< n_aug_; i++)
 }
 
 
-void UKF::SigmaPointPrediction(double delta_t, MatrixXd* Xsig_aug) 
+void UKF::SigmaPointPrediction(double delta_t, MatrixXd &Xsig_aug) 
 {
 	//predict sigma points	
 	for (int i = 0; i< 2*n_aug_+1; i++)	
@@ -322,7 +322,7 @@ void UKF::UpdateRadar(VectorXd &z) {
   
 }
 
-void UKF::PredictLidarMeasurement(int n_z, VectorXd* z_pred, VectorXd* Zsig, MatrixXd* S )
+void UKF::PredictLidarMeasurement(int n_z, VectorXd &z_pred, VectorXd &Zsig, MatrixXd &S )
 {
 	
 
@@ -370,7 +370,7 @@ S = S + R;
 }
 
 
-void UKF::PredictRadarMeasurement(int n_z, VectorXd* z_pred, VectorXd* Zsig, MatrixXd* S )
+void UKF::PredictRadarMeasurement(int n_z, VectorXd &z_pred, VectorXd &Zsig, MatrixXd &S )
 {
 	
 
@@ -424,7 +424,7 @@ S = S + R;
 
 }
 
-void UKF::UpdateState(int n_z, VectorXd &z, VectorXd* z_pred, VectorXd* Zsig, MatrixXd* S)
+void UKF::UpdateState(int n_z, VectorXd &z, VectorXd &z_pred, VectorXd &Zsig, MatrixXd &S)
 {
 	//create matrix for cross correlation Tc  
 	MatrixXd Tc = MatrixXd(n_x_, n_z);
