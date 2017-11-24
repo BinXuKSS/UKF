@@ -190,7 +190,7 @@ for (int i = 0; i< n_aug_; i++)
 }
 
 
-void UKF::SigmaPointPrediction(double delta_t, MatrixXd &Xsig_aug) 
+void UKF::SigmaPointPrediction(float delta_t, MatrixXd &Xsig_aug) 
 {
 	//predict sigma points	
 	for (int i = 0; i< 2*n_aug_+1; i++)	
@@ -215,7 +215,8 @@ void UKF::SigmaPointPrediction(double delta_t, MatrixXd &Xsig_aug)
 			{
 			px_p = p_x + v*delta_t*cos(yaw);		
 			py_p = p_y + v*delta_t*sin(yaw);	
-			}	 double v_p = v;	
+			}	 
+		float v_p = v;	
 		float yaw_p = yaw + yawd*delta_t;	  
 		float yawd_p = yawd;    
 		//add noise	  
@@ -242,12 +243,12 @@ void UKF::PredictMeanAndCovariance(void )
 
 
 	// set weights	
-	double weight_0 = lambda_/(lambda_+n_aug_);  
+	float weight_0 = lambda_/(lambda_+n_aug_);  
 	weights_(0) = weight_0;  
 	for (int i=1; i<2*n_aug_+1; i++) 
 		{  
 		//2n+1 weights    
-		double weight = 0.5/(n_aug_+lambda_);	  
+		float weight = 0.5/(n_aug_+lambda_);	  
 		weights_(i) = weight;	}  
 		//predicted state mean  
 		x_.fill(0.0);  
@@ -332,12 +333,12 @@ for (int i = 0; i < 2 * n_aug_ + 1; i++)
 	MatrixXd Zsig = MatrixXd(n_z, 2 * n_aug_ + 1);
 	//2n+1 simga points    
 	// extract values for better readibility
-	double p_x = Xsig_pred_(0,i);    
-	double p_y = Xsig_pred_(1,i);    
-	double v  = Xsig_pred_(2,i);	  
-	double yaw = Xsig_pred_(3,i);	  
-	double v1 = cos(yaw)*v;	 
-	double v2 = sin(yaw)*v;	
+	float p_x = Xsig_pred_(0,i);    
+	float p_y = Xsig_pred_(1,i);    
+	float v  = Xsig_pred_(2,i);	  
+	float yaw = Xsig_pred_(3,i);	  
+	float v1 = cos(yaw)*v;	 
+	float v2 = sin(yaw)*v;	
 	// measurement model	
 	Zsig(0,i) = p_x;						
 	//px    
@@ -380,12 +381,12 @@ for (int i = 0; i < 2 * n_aug_ + 1; i++)
 	MatrixXd Zsig = MatrixXd(n_z, 2 * n_aug_ + 1);
 	//2n+1 simga points    
 	// extract values for better readibility
-	double p_x = Xsig_pred_(0,i);    
-	double p_y = Xsig_pred_(1,i);    
-	double v  = Xsig_pred_(2,i);	  
-	double yaw = Xsig_pred_(3,i);	  
-	double v1 = cos(yaw)*v;	 
-	double v2 = sin(yaw)*v;	
+	float p_x = Xsig_pred_(0,i);    
+	float p_y = Xsig_pred_(1,i);    
+	float v  = Xsig_pred_(2,i);	  
+	float yaw = Xsig_pred_(3,i);	  
+	float v1 = cos(yaw)*v;	 
+	float v2 = sin(yaw)*v;	
 	// measurement model	
 	Zsig(0,i) = sqrt(p_x*p_x + p_y*p_y);						
 	//r    
