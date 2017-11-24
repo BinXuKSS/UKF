@@ -294,7 +294,7 @@ void UKF::UpdateLidar(VectorXd &z) {
 	MatrixXd S = MatrixXd(n_z,n_z);	
 	//mean predicted measurement	
 	VectorXd z_pred = VectorXd(n_z);
-	PredictLidarMeasurement(n_z, z_pred, Zsig, S );
+	PredictLidarMeasurement(n_z, z_pred, Zsig, S);
     UpdateState(n_z, z, z_pred, Zsig, S);
 
   
@@ -318,7 +318,7 @@ void UKF::UpdateRadar(VectorXd &z) {
   MatrixXd S = MatrixXd(n_z,n_z);	
   //mean predicted measurement  
   VectorXd z_pred = VectorXd(n_z);	
-  PredictRadarMeasurement(n_z, z_pred, Zsig, S );
+  PredictRadarMeasurement(n_z, z_pred, Zsig, S);
   UpdateState(n_z, z, z_pred, Zsig, S);
   
 }
