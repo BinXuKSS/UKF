@@ -92,6 +92,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   Complete this function! Make sure you switch between lidar and radar
   measurements.
   */
+
+  cout << "cycle 1" << endl;
   if(is_initialized_ == false)
   {
     float px;
@@ -123,6 +125,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	return;
   }
 
+  cout << "cycle 2" << endl;
   float dt = (meas_package.timestamp_ - previous_timestamp_)/1000000.0;  // convert dt to seconds
 
   cout << "before prediction" << endl;
