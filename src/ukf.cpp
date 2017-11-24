@@ -279,7 +279,7 @@ void UKF::PredictMeanAndCovariance(void )
  * Updates the state and the state covariance matrix using a laser measurement.
  * @param {MeasurementPackage} meas_package
  */
-void UKF::UpdateLidar(MeasurementPackage meas_package) {
+void UKF::UpdateLidar(VectorXd &z) {
   /**
   TODO:
 
@@ -294,7 +294,7 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
 	//mean predicted measurement	
 	VectorXd z_pred = VectorXd(n_z);
 	PredictLidarMeasurement(n_z, Zsig, S );
-    UpdateState(n_z, z_pred, Zsig, S);
+    UpdateState(n_z, z, z_pred, Zsig, S);
 
   
 }
@@ -303,7 +303,7 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
  * Updates the state and the state covariance matrix using a radar measurement.
  * @param {MeasurementPackage} meas_package
  */
-void UKF::UpdateRadar(MeasurementPackage meas_package) {
+void UKF::UpdateRadar(VectorXd &z) {
   /**
   TODO:
 
@@ -318,7 +318,7 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
   //mean predicted measurement  
   VectorXd z_pred = VectorXd(n_z);	
   PredictRadarMeasurement(n_z, Zsig, S );
-  UpdateState(n_z, z_pred, Zsig, S);
+  UpdateState(n_z, z, z_pred, Zsig, S);
   
 }
 
@@ -424,7 +424,7 @@ S = S + R;
 
 }
 
-void UKF::UpdateState(int n_z, VectorXd* z_pred, VectorXd* Zsig, MatrixXd* S)
+void UKF::UpdateState(int n_z, VectorXd &z, VectorXd* z_pred, VectorXd* Zsig, MatrixXd* S)
 {
 	//create matrix for cross correlation Tc  
 	MatrixXd Tc = MatrixXd(n_x_, n_z);
