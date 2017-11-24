@@ -255,7 +255,7 @@ void UKF::PredictMeanAndCovariance(void )
 		for (int i = 0; i < 2 * n_aug_ + 1; i++) 
 			{	
 			//iterate over sigma points    
-			x = x+ weights_(i) * Xsig_pred_.col(i);  
+			x_ = x_+ weights_(i) * Xsig_pred_.col(i);  
 			}  
 		//predicted state covariance matrix  
 		P_.fill(0.0);	
@@ -294,7 +294,7 @@ void UKF::UpdateLidar(VectorXd &z) {
 	MatrixXd S = MatrixXd(n_z,n_z);	
 	//mean predicted measurement	
 	VectorXd z_pred = VectorXd(n_z);
-	PredictLidarMeasurement(n_z, Zsig, S );
+	PredictLidarMeasurement(n_z, z_pred, Zsig, S );
     UpdateState(n_z, z, z_pred, Zsig, S);
 
   
@@ -318,7 +318,7 @@ void UKF::UpdateRadar(VectorXd &z) {
   MatrixXd S = MatrixXd(n_z,n_z);	
   //mean predicted measurement  
   VectorXd z_pred = VectorXd(n_z);	
-  PredictRadarMeasurement(n_z, Zsig, S );
+  PredictRadarMeasurement(n_z, z_pred, Zsig, S );
   UpdateState(n_z, z, z_pred, Zsig, S);
   
 }
