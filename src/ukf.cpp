@@ -248,7 +248,7 @@ void UKF::SigmaPointPrediction(float delta_t, MatrixXd &Xsig_aug)
 }
 
 
-void UKF::PredictMeanAndCovariance(void )
+void UKF::PredictMeanAndCovariance( )
 {
 	//create vector for weights  
 
