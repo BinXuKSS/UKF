@@ -116,6 +116,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 
 	is_initialized_ = true;
 	previous_timestamp_ = meas_package.timestamp_;
+	cout << "initialized" << endl;
 	
 	return;
   }
@@ -123,14 +124,19 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   float dt = (meas_package.timestamp_ - previous_timestamp_)/1000000.0;  // convert dt to seconds
 
   Prediction(dt);
+  cout << "prediction done" << endl;
   
   if(meas_package.sensor_type_ == MeasurementPackage::RADAR)
   {
-    UpdateRadar(meas_package.raw_measurements_);
+	cout << "before update radar" << endl;
+	UpdateRadar(meas_package.raw_measurements_);
+	cout << "after update radar" << endl;
   }
   else if(meas_package.sensor_type_ == MeasurementPackage::LASER)
   {
-    UpdateLidar(meas_package.raw_measurements_);
+	cout << "before update lidar" << endl;
+	UpdateLidar(meas_package.raw_measurements_);
+	cout << "after update lidar" << endl;
   }
   previous_timestamp_ = meas_package.timestamp_;
   
