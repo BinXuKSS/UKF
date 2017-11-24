@@ -111,12 +111,6 @@ public:
 
   void PredictMeanAndCovariance(void );
 
-  void PredictLidarMeasurement(int n_z, VectorXd &z_pred, VectorXd &Zsig, MatrixXd &S );
-
-  void PredictRadarMeasurement(int n_z, VectorXd &z_pred, VectorXd &Zsig, MatrixXd &S );
-
-  void UpdateState(int n_z, VectorXd &z, VectorXd &z_pred, VectorXd &Zsig, MatrixXd &S);
-
 
 };
 
