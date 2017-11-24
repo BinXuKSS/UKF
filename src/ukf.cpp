@@ -98,8 +98,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	if(meas_package.sensor_type_ == MeasurementPackage::RADAR)
 	{
 		float phi = meas_package.raw_measurements_(1);
-		px = meas_package.raw_measurements_(0).cos(phi);
-		py = meas_package.raw_measurements_(0).sin(phi);
+		px = meas_package.raw_measurements_(0)*cos(phi);
+		py = meas_package.raw_measurements_(0)*sin(phi);
 	}
 	else if(meas_package.sensor_type_ == MeasurementPackage::LASER)
 	{
