@@ -123,6 +123,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 
   float dt = (meas_package.timestamp_ - previous_timestamp_)/1000000.0;  // convert dt to seconds
 
+  cout << "before prediction" << endl;
   Prediction(dt);
   cout << "prediction done" << endl;
   
@@ -157,9 +158,13 @@ void UKF::Prediction(float delta_t) {
     //create sigma point matrix  
   MatrixXd Xsig_aug = MatrixXd(n_aug_, 2 * n_aug_ + 1);//Augmented Sigma Points
   VectorXd weights_ = VectorXd(2*n_aug_+1);
+  cout << "argmented sigma" << endl;
   AugmentedSigmaPoints(Xsig_aug);
+  cout << "sigma prediction " << endl;
   SigmaPointPrediction(delta_t, Xsig_aug);
+  cout << "before predict mean " << endl;
   PredictMeanAndCovariance();
+  cout << "mean done" << endl;
   
 
   
