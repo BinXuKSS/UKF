@@ -252,13 +252,16 @@ void UKF::PredictMeanAndCovariance( )
 {
 	//create vector for weights  
 
-
+	cout << "1" << endl;
 	// set weights	
-	float weight_0 = lambda_/(lambda_+n_aug_);  
+	float weight_0 = lambda_/(lambda_+n_aug_); 
+	cout << "2" << endl;
 	weights_(0) = weight_0;  
+	cout << "3" << endl;
 	for (int i=1; i<2*n_aug_+1; i++) 
 	{  
-		//2n+1 weights    
+		//2n+1 weights   
+		cout << "4" << endl;
 		float weight = 0.5/(n_aug_+lambda_);	  
 		weights_(i) = weight;	
 	}  
