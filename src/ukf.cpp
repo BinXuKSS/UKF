@@ -72,6 +72,8 @@ UKF::UKF() {
   lambda_ = 3 - n_aug_;
 
   Xsig_pred_ = MatrixXd(n_x_, 2*n_aug_ + 1);
+
+  weights_ = VectorXd(2*n_aug_+1);
   
   is_initialized_ = false;
   
@@ -157,7 +159,7 @@ void UKF::Prediction(float delta_t) {
   */
     //create sigma point matrix  
   MatrixXd Xsig_aug = MatrixXd(n_aug_, 2 * n_aug_ + 1);//Augmented Sigma Points
-  VectorXd weights_ = VectorXd(2*n_aug_+1);
+  
   cout << "argmented sigma" << endl;
   AugmentedSigmaPoints(Xsig_aug);
   cout << "sigma prediction " << endl;
