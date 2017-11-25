@@ -165,13 +165,14 @@ void UKF::Prediction(float delta_t) {
     //create sigma point matrix  
   MatrixXd Xsig_aug = MatrixXd(n_aug_, 2 * n_aug_ + 1);//Augmented Sigma Points
   
-  cout << "argmented sigma" << endl;
+
   AugmentedSigmaPoints(Xsig_aug);
-  cout << "sigma prediction " << endl;
+  cout << "augmented sigma: " << Xsig_aug << endl;
   SigmaPointPrediction(delta_t, Xsig_aug);
-  cout << "before predict mean " << endl;
+  cout << "predicted sigma: " << Xsig_aug << endl;
   PredictMeanAndCovariance();
-  cout << "mean done" << endl;
+  cout << "predict mean: " << x_ << endl;
+  cout << "predict covariance: " << P_ << endl;
   
 
   
@@ -438,12 +439,14 @@ void UKF::UpdateRadar(VectorXd &z) {
 		Zsig(2,i) = (p_x*v1 + p_y*v2 ) / sqrt(p_x*p_x + p_y*p_y);	
 		//r_dot  
 	}	
+	cout << "Zsig: " <<Zsig << endl;
 
 	z_pred.fill(0.0);  
 	for (int i=0; i < 2*n_aug_+1; i++) 
 	{		
 		z_pred = z_pred + weights_(i) * Zsig.col(i);  
 	}	
+	cout << "z_pred: " << z_pred << endl;
 	//measurement covariance matrix S 
 
 	S.fill(0.0);  
@@ -459,6 +462,8 @@ void UKF::UpdateRadar(VectorXd &z) {
 			z_diff(1)+=2.*M_PI;	
 		S = S + weights_(i) * z_diff * z_diff.transpose();  
 	}  
+
+	cout << "S: " << S << endl;
 	//add measurement noise covariance matrix  
 	MatrixXd R = MatrixXd(n_z,n_z);  
 	R <<	  std_radr_*std_radr_, 0, 0,			
