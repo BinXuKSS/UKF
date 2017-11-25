@@ -169,7 +169,7 @@ void UKF::Prediction(float delta_t) {
   AugmentedSigmaPoints(Xsig_aug);
   cout << "augmented sigma: " << Xsig_aug << endl;
   SigmaPointPrediction(delta_t, Xsig_aug);
-  cout << "predicted sigma: " << Xsig_aug << endl;
+  cout << "predicted sigma: " << Xsig_pred_ << endl;
   PredictMeanAndCovariance();
   cout << "predict mean: " << x_ << endl;
   cout << "predict covariance: " << P_ << endl;
