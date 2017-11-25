@@ -144,6 +144,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	UpdateLidar(meas_package.raw_measurements_);
 	cout << "after update lidar" << endl;
   }
+  cout <<"x_ : " << x_ << endl;
+  cout << "P_ : " << P_ << endl;
   previous_timestamp_ = meas_package.timestamp_;
   
 }

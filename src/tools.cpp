@@ -1,6 +1,7 @@
 #include <iostream>
 #include "tools.h"
 
+using namespace std;
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
 using std::vector;
@@ -18,7 +19,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 	
     VectorXd rmse(4);
 	rmse << 0,0,0,0;
-/*
+
 	// check the validity of the following inputs:
 	//  * the estimation vector size should not be zero
 	//  * the estimation vector size should equal ground truth vector size
@@ -43,7 +44,9 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 
 	//calculate the squared root
 	rmse = rmse.array().sqrt();
-*/
+
+	cout << rmse << endl;
+
 	//return the result
 	return rmse;
 	
