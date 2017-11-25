@@ -129,11 +129,7 @@ int main()
     	  
     	  estimations.push_back(estimate);
 
-		  cout << "before RMSE" << endl;
-
     	  VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
-
-		  cout << "after RMSE" << endl;
 
           json msgJson;
           msgJson["estimate_x"] = p_x;
@@ -144,9 +140,7 @@ int main()
           msgJson["rmse_vy"] = RMSE(3);
           auto msg = "42[\"estimate_marker\"," + msgJson.dump() + "]";
           // std::cout << msg << std::endl;
-          ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
-		  cout << "a" << endl;
-	  
+          ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);	  
         }
       } else {
         
@@ -161,7 +155,6 @@ int main()
   // doesn't compile :-(
   h.onHttpRequest([](uWS::HttpResponse *res, uWS::HttpRequest req, char *data, size_t, size_t) {
     const std::string s = "<h1>Hello world!</h1>";
-	cout << "b" << endl;
     if (req.getUrl().valueLength == 1)
     {
       res->end(s.data(), s.length());
@@ -175,7 +168,6 @@ int main()
 
   h.onConnection([&h](uWS::WebSocket<uWS::SERVER> ws, uWS::HttpRequest req) {
     std::cout << "Connected!!!" << std::endl;
-	cout << "c" << endl;
   });
 
   h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER> ws, int code, char *message, size_t length) {
@@ -194,7 +186,6 @@ int main()
     return -1;
   }
   h.run();
-  cout << "d" << endl;
 }
 
 
