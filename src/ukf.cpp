@@ -374,13 +374,18 @@ void UKF::UpdateLidar(VectorXd z) {
 		//2n+1 simga points    
 		//residual	 
 		VectorXd z_diff = Zsig.col(i) - z_pred;	
+
+		cout << "z_diff" << z_diff << endl;
 	 
   
 		// state difference	  
-		VectorXd x_diff = Xsig_pred_.col(i) - x_;	 
+		VectorXd x_diff = Xsig_pred_.col(i) - x_;
+		cout << "x_diff" << x_diff << endl;
   
 
 		Tc = Tc + weights_(i) * x_diff * z_diff.transpose();  
+		cout << "Tc" << Tc << endl;
+		
 	}	
 	cout << "TC: " << Tc << endl;
 	//Kalman gain K;  
