@@ -337,12 +337,15 @@ void UKF::UpdateLidar(VectorXd z) {
 		//py	
 
 	}	
+	cout << "Zsig: " << Zsig << endl;
 
 	z_pred.fill(0.0);  
 	for (int i=0; i < 2*n_aug_+1; i++) 
 	{		
 		z_pred = z_pred + weights_(i) * Zsig.col(i);  
 	}	
+
+	cout << "z_pred: " << z_pred << endl;
 	//measurement covariance matrix S 
 
 	S.fill(0.0);  
@@ -353,6 +356,8 @@ void UKF::UpdateLidar(VectorXd z) {
 		VectorXd z_diff = Zsig.col(i) - z_pred;	 
 		S = S + weights_(i) * z_diff * z_diff.transpose();  
 	}  
+
+	cout << "S: " << S << endl;
 	//add measurement noise covariance matrix  
 	MatrixXd R = MatrixXd(n_z,n_z);  
 	R <<	  std_laspx_*std_laspx_, 0, 			
@@ -365,7 +370,7 @@ void UKF::UpdateLidar(VectorXd z) {
 	//calculate cross correlation matrix  
 	Tc.fill(0.0);  
 	for (int i = 0; i < 2 * n_aug_ + 1; i++) 
-		{	
+	{	
 		//2n+1 simga points    
 		//residual	 
 		VectorXd z_diff = Zsig.col(i) - z_pred;	
@@ -376,14 +381,18 @@ void UKF::UpdateLidar(VectorXd z) {
   
 
 		Tc = Tc + weights_(i) * x_diff * z_diff.transpose();  
-		}	//Kalman gain K;  
-		MatrixXd K = Tc * S.inverse();  
+	}	
+	cout << "TC: " << Tc << endl;
+	//Kalman gain K;  
+	MatrixXd K = Tc * S.inverse();  
+	cout << "K: " << K << endl;
 		//residual  
-		VectorXd z_diff = z - z_pred;  
+	VectorXd z_diff = z - z_pred; 
+	cout << "z_diff: " << z_diff << endl;
 
 		//update state mean and covariance matrix  
-		x_ = x_ + K * z_diff;  
-		P_ = P_ - K*S*K.transpose();
+	x_ = x_ + K * z_diff;  
+	P_ = P_ - K*S*K.transpose();
 
 
   

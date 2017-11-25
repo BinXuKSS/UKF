@@ -42,7 +42,7 @@ int main()
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
-    cout << "e" << endl;
+ 
 
     if (length && length > 2 && data[0] == '4' && data[1] == '2')
     {
@@ -105,7 +105,7 @@ int main()
     	  gt_values(2) = vx_gt;
     	  gt_values(3) = vy_gt;
     	  ground_truth.push_back(gt_values);
-		  cout << "f" << endl;
+
           
           //Call ProcessMeasurment(meas_package) for Kalman filter
     	  ukf.ProcessMeasurement(meas_package);    	  
