@@ -307,7 +307,7 @@ void UKF::PredictMeanAndCovariance( )
  * Updates the state and the state covariance matrix using a laser measurement.
  * @param {MeasurementPackage} meas_package
  */
-void UKF::UpdateLidar(VectorXd &z) {
+void UKF::UpdateLidar(VectorXd z) {
   /**
   TODO:
 
@@ -324,15 +324,12 @@ void UKF::UpdateLidar(VectorXd &z) {
 	//transform sigma points into measurement space  
 	for (int i = 0; i < 2 * n_aug_ + 1; i++) 
 	{	
-		MatrixXd Zsig = MatrixXd(n_z, 2 * n_aug_ + 1);
+		
 		//2n+1 simga points    
 		// extract values for better readibility
 		float p_x = Xsig_pred_(0,i);    
 		float p_y = Xsig_pred_(1,i);    
-		float v  = Xsig_pred_(2,i);	  
-		float yaw = Xsig_pred_(3,i);	  
-		float v1 = cos(yaw)*v;	 
-		float v2 = sin(yaw)*v;	
+	
 		// measurement model	
 		Zsig(0,i) = p_x;						
 		//px    
@@ -372,24 +369,18 @@ void UKF::UpdateLidar(VectorXd &z) {
 		//2n+1 simga points    
 		//residual	 
 		VectorXd z_diff = Zsig.col(i) - z_pred;	
-		//angle normalization	 
-		while (z_diff(1)> M_PI) z_diff(1)-=2.*M_PI;	
-		while (z_diff(1)<-M_PI) z_diff(1)+=2.*M_PI;    
+	 
+  
 		// state difference	  
 		VectorXd x_diff = Xsig_pred_.col(i) - x_;	 
-		//angle normalization	  
-		while (x_diff(3)> M_PI) 
-			x_diff(3)-=2.*M_PI;	 
-		while (x_diff(3)<-M_PI) 
-			x_diff(3)+=2.*M_PI;	
+  
+
 		Tc = Tc + weights_(i) * x_diff * z_diff.transpose();  
 		}	//Kalman gain K;  
 		MatrixXd K = Tc * S.inverse();  
 		//residual  
 		VectorXd z_diff = z - z_pred;  
-		//angle normalization	
-		while (z_diff(1)> M_PI) z_diff(1)-=2.*M_PI;  
-		while (z_diff(1)<-M_PI) z_diff(1)+=2.*M_PI;  
+
 		//update state mean and covariance matrix  
 		x_ = x_ + K * z_diff;  
 		P_ = P_ - K*S*K.transpose();
@@ -402,7 +393,7 @@ void UKF::UpdateLidar(VectorXd &z) {
  * Updates the state and the state covariance matrix using a radar measurement.
  * @param {MeasurementPackage} meas_package
  */
-void UKF::UpdateRadar(VectorXd &z) {
+void UKF::UpdateRadar(VectorXd z) {
   /**
   TODO:
 
@@ -420,7 +411,6 @@ void UKF::UpdateRadar(VectorXd &z) {
   //transform sigma points into measurement space  
 	for (int i = 0; i < 2 * n_aug_ + 1; i++) 
 	{	
-		MatrixXd Zsig = MatrixXd(n_z, 2 * n_aug_ + 1);
 		//2n+1 simga points    
 		// extract values for better readibility
 		float p_x = Xsig_pred_(0,i);    
