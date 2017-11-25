@@ -42,6 +42,7 @@ int main()
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
+    cout << "e" << endl;
 
     if (length && length > 2 && data[0] == '4' && data[1] == '2')
     {
@@ -104,6 +105,7 @@ int main()
     	  gt_values(2) = vx_gt;
     	  gt_values(3) = vy_gt;
     	  ground_truth.push_back(gt_values);
+		  cout << "f" << endl;
           
           //Call ProcessMeasurment(meas_package) for Kalman filter
     	  ukf.ProcessMeasurement(meas_package);    	  
@@ -143,6 +145,7 @@ int main()
           auto msg = "42[\"estimate_marker\"," + msgJson.dump() + "]";
           // std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+		  cout << "a" << endl;
 	  
         }
       } else {
@@ -158,6 +161,7 @@ int main()
   // doesn't compile :-(
   h.onHttpRequest([](uWS::HttpResponse *res, uWS::HttpRequest req, char *data, size_t, size_t) {
     const std::string s = "<h1>Hello world!</h1>";
+	cout << "b" << endl;
     if (req.getUrl().valueLength == 1)
     {
       res->end(s.data(), s.length());
@@ -171,6 +175,7 @@ int main()
 
   h.onConnection([&h](uWS::WebSocket<uWS::SERVER> ws, uWS::HttpRequest req) {
     std::cout << "Connected!!!" << std::endl;
+	cout << "c" << endl;
   });
 
   h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER> ws, int code, char *message, size_t length) {
@@ -189,6 +194,7 @@ int main()
     return -1;
   }
   h.run();
+  cout << "d" << endl;
 }
 
 
