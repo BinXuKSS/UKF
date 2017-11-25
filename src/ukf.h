@@ -97,13 +97,13 @@ public:
    * Updates the state and the state covariance matrix using a laser measurement
    * @param meas_package The measurement at k+1
    */
-  void UpdateLidar(VectorXd &z);
+  void UpdateLidar(VectorXd z);
 
   /**
    * Updates the state and the state covariance matrix using a radar measurement
    * @param meas_package The measurement at k+1
    */
-  void UpdateRadar(VectorXd &z);
+  void UpdateRadar(VectorXd z);
 
   void AugmentedSigmaPoints(MatrixXd &Xsig_aug);
 
