@@ -361,7 +361,7 @@ void UKF::UpdateLidar(VectorXd z) {
 	//add measurement noise covariance matrix  
 	MatrixXd R = MatrixXd(n_z,n_z);  
 	R <<	  std_laspx_*std_laspx_, 0, 			
-		0, std_laspy_*std_laspy_, 		    
+		0, std_laspy_*std_laspy_; 		    
 	S = S + R;
 
 		//create matrix for cross correlation Tc  
